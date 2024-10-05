@@ -7,9 +7,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 function scrapePageContent() {
-  return [
-    {type: 'visible_text', content: getVisibleText(document.body)}
-  ];
+  return {
+    url: window.location.href,
+    title: document.title,
+    visible_text: getVisibleText(document.body)
+  };
 }
 
 function getVisibleText(element) {

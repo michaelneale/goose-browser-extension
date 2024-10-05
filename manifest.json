@@ -1,11 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "Web Scraper to JSONL",
+  "name": "Web Scraper to JSON",
   "version": "1.0",
-  "description": "Scrape content from a webpage and save it to JSONL files",
+  "description": "Scrape content from a webpage and save it to JSON files",
   "permissions": ["activeTab", "scripting", "storage"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "goose_icon.txt"
   },
   "background": {
     "service_worker": "background.js"
@@ -15,5 +16,10 @@
       "matches": ["<all_urls>"],
       "js": ["content_script.js"]
     }
-  ]
+  ],
+  "icons": {
+    "16": "goose_icon.txt",
+    "48": "goose_icon.txt",
+    "128": "goose_icon.txt"
+  }
 }
