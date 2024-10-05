@@ -2,14 +2,14 @@
   "manifest_version": 3,
   "name": "Web Scraper to JSON",
   "version": "1.0",
-  "description": "Scrape content from a webpage and save it to JSON files",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "description": "Scrape content from a webpage and send it to localhost",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": [
+    "http://localhost:9898/*"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "goose_icon.txt"
-  },
-  "background": {
-    "service_worker": "background.js"
   },
   "content_scripts": [
     {

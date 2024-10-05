@@ -3,22 +3,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function scrapeAndDisplay() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      if (!tabs || tabs.length === 0) {
+        resultDiv.textContent = 'Error: No active tab found';
+        return;
+      }
+
       chrome.tabs.sendMessage(tabs[0].id, {action: "scrape"}, function(response) {
+        if (chrome.runtime.lastError) {
+          resultDiv.textContent = 'Error: ' + chrome.runtime.lastError.message;
+          return;
+        }
+
         if (response && response.data) {
           const jsonData = JSON.stringify(response.data, null, 2); // Pretty-print JSON
-          const blob = new Blob([jsonData], {type: 'application/json'});
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'scraped_data.json';
-          a.textContent = 'Download JSON';
-          resultDiv.innerHTML = '';
-          resultDiv.appendChild(a);
           
-          // Display pretty-printed JSON in the popup
-          const pre = document.createElement('pre');
-          pre.textContent = jsonData;
-          resultDiv.appendChild(pre);
+          // Display scraped content
+          resultDiv.innerHTML = '<pre>' + jsonData + '</pre>';
+
+          // Send data to localhost:9898
+          fetch('http://localhost:9898', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: jsonData,
+          })
+          .then(response => response.text())
+          .then(result => {
+            resultDiv.innerHTML += '<p>Data sent to localhost:9898</p>';
+          })
+          .catch(error => {
+            resultDiv.innerHTML += '<p>Error sending data to localhost:9898: ' + error.message + '</p>';
+          });
         } else {
           resultDiv.textContent = 'Error: Could not scrape data';
         }
