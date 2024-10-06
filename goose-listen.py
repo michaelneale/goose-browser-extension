@@ -46,8 +46,9 @@ tasks:
             # Open Terminal and start Goose with the plan
             applescript = f'''
             tell application "Terminal"
-                do script "goose session start --plan {plan_file_path}"
                 activate
+                delay 1
+                do script "goose session start --plan {plan_file_path}"
             end tell
             '''
             subprocess.run(["osascript", "-e", applescript])
