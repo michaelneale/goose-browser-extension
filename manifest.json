@@ -9,7 +9,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "goose_icon.txt"
+    "default_icon": "goose.png"
   },
   "content_scripts": [
     {
@@ -18,8 +18,8 @@
     }
   ],
   "icons": {
-    "16": "goose_icon.txt",
-    "48": "goose_icon.txt",
-    "128": "goose_icon.txt"
+    "16": "goose.png",
+    "48": "goose.png",
+    "128": "goose.png"
   }
 }
