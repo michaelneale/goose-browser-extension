@@ -9,10 +9,7 @@ class GooseHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length)
-        
-        print("Received data:")
-        print(post_data.decode('utf-8'))
-        
+                
         try:
             json_data = json.loads(post_data.decode('utf-8'))
             
