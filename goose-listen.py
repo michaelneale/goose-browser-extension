@@ -35,7 +35,9 @@ tasks:
   - please read the chatgpt context from {chat_file_path}
   - look at the chat context to work out what things are up to, if we need to test something
   - note where code blocks may be in the context, and what content is irrelevant
-  - decide if you want to ask the user what to do next, with a summary of the last interaction
+  - if you are running in an empty directory, assume that the user will want to build some of what was described in the chat session thus far as a new project (ask if not clear)
+  - check if in an existing project dir, and look around and work out how to contribute to it from the chat so far (ask if unclear).
+  - decide if you want to ask the user what to do next, with a summary of the last interaction from chat
 """
             
             with open(plan_file_path, 'w') as f:
