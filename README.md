@@ -3,6 +3,11 @@ This is a browser extension (chrome, brave etc): Start your project in chatGPT, 
 
 Uses https://github.com/block-open-source/goose (assumes you have that installed already)
 
+Live demo of it making a web scraper from chatgpt -> goose: 
+
+https://github.com/user-attachments/assets/dedde39c-6eb9-425e-a2cf-6588605e3afe
+
+
 ## Installation and usage
 
 1. Clone this repository or download the source code.
@@ -10,6 +15,7 @@ Uses https://github.com/block-open-source/goose (assumes you have that installed
 3. Enable "Developer mode" in the top right corner.
 4. Click "Load unpacked" and select the directory containing the extension files.
 5. Run `python goose-listen.py`
+
 
 ## Limitations and TODO
 
@@ -19,3 +25,5 @@ Only tested with ChatGPT
 Only starts new sessions
 TODO: should be able to push back into chatgpt to add in newer context from the session in goose and go back and forth ideally (can use session jsonl for that ideally to sync context)
 
+
+<img width="1268" alt="image" src="https://github.com/user-attachments/assets/ababf8e0-b49e-4c80-b8bc-1709f37220ad">
