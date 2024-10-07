@@ -43,12 +43,14 @@ tasks:
             
             print(f"Plan saved to {plan_file_path}")
             
+            # Ensure the directory exists before starting Goose
+            os.makedirs(os.path.expanduser('~/Documents/goose-chat'), exist_ok=True)
+
             # Open Terminal and start Goose with the plan
             applescript = f'''
             tell application "Terminal"
                 activate
-                delay 1
-                do script "goose session start --plan {plan_file_path}"
+                do script "cd ~/Documents/goose-chat && goose session start --plan {plan_file_path}"
             end tell
             '''
             subprocess.run(["osascript", "-e", applescript])

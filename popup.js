@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
           })
           .catch(error => {
             console.error('Error sending data to localhost:9898:', error.message);
+document.getElementById('result').innerText = 'The goose listener must be running. Please run python goose-listen.py';
           });
         } else {
           console.error('Error: Could not scrape data');
