@@ -1,6 +1,8 @@
 # ChatGPT to goose
 This is a browser extension (chrome, brave etc): Start your project in chatGPT, and then "eject" to goose where you can run code and continue development of it locally with all the context from your chatGPT or chatGPT canvas session.
 
+Uses https://github.com/block-open-source/goose (assumes you have that installed already)
+
 ## Installation and usage
 
 1. Clone this repository or download the source code.
