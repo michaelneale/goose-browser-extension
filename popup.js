@@ -39,24 +39,6 @@ document.getElementById('result').innerText = 'The goose listener must be runnin
       });
     });
 
-    const askGooseButton = document.getElementById('askGooseButton');
-    if (askGooseButton) {  // Ensure the button exists before adding event listener
-      askGooseButton.addEventListener('click', function () {
-        fetch('http://localhost:9898/ask', {
-          method: 'POST',
-        })
-          .then(response => response.text())
-          .then(data => {
-            console.log('Response from goose:', data);
-            document.getElementById('result').innerText = data;
-          })
-          .catch(error => {
-            console.error('Error asking goose:', error.message);
-            document.getElementById('result').innerText = 'Error contacting goose.';
-          });
-      });
-    }
-
   }
 
   // Scrape when the button is clicked
