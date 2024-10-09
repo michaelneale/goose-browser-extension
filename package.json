@@ -1,0 +1,18 @@
+{
+  "name": "chrome_extension",
+  "version": "1.0.0",
+  "description": "This is a browser extension (chrome, brave etc): Start your project in chatGPT, and then \"eject\" to goose where you can run code and continue development of it locally with all the context from your chatGPT or chatGPT canvas session.",
+  "main": "background.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}
