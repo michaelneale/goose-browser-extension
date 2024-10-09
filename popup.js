@@ -52,18 +52,25 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
-      chrome.tabs.sendMessage(tabs[0].id, {action: "injectContext", text: "hello world"}, function(response) {
-        if (chrome.runtime.lastError) {
-          console.error('Error:', chrome.runtime.lastError.message);
-          return;
-        }
+      fetch('http://localhost:9898/context')
+        .then(response => response.json())
+        .then(data => {
+          chrome.tabs.sendMessage(tabs[0].id, {action: "injectContext", text: data.text}, function(response) {
+            if (chrome.runtime.lastError) {
+              console.error('Error:', chrome.runtime.lastError.message);
+              return;
+            }
 
-        if (response && response.status === 'success') {
-          console.log('Text injected successfully');
-        } else {
-          console.error('Error injecting text:', response.error || 'Unknown error');
-        }
-      });
+            if (response && response.status === 'success') {
+              console.log('Text injected successfully');
+            } else {
+              console.error('Error injecting text:', response.error || 'Unknown error');
+            }
+          });
+        })
+        .catch(error => {
+          console.error('Error retrieving context:', error.message);
+        });
     });
   }
 

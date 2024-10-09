@@ -66,6 +66,18 @@ tasks:
             self.wfile.write(b"Error: Received data is not valid JSON")
 
     def do_GET(self):
+        if self.path == '/context':
+        # Return some mock context data for testing
+                context_data = {
+            'text': 'This is a sample context text from the server.'
+        }
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(context_data).encode('utf-8'))
+        return
+
+    # For other GET requests, return a simple message
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
