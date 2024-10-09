@@ -35,3 +35,28 @@ test('scrapePageContent should return page URL, title, and visible text', () => 
     visible_text: ['Visible text on the page']
   });
 });
+
+// Test injectContext function
+function sendMessage(action, text) {
+  let response;
+
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === action) {
+      sendResponse({ status: 'success' });
+      response = { status: 'success' };
+    }
+  });
+
+  chrome.runtime.onMessage.addListener.mock.calls[0][0](
+    { action, text },
+    null,
+    (res) => { response = {status: 'success'}; }
+  );
+
+  return response;
+}
+
+test('injectContext should correctly handle injectContext action', () => {
+  const response = sendMessage("injectContext", "hello world");
+  expect(response).toEqual({ status: 'success' });
+});

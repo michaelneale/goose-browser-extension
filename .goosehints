@@ -1,0 +1,5 @@
+this is a browser extension project which works in chrome or brave etc that support this.
+run npm run test to test it after code changes
+README.md has instructions for how to set it up in a browser
+The content_script.js handles getting content from (and to) a page - popup(html, js) for the extension GUI
+goose-listen.py is a python server script to connect the goose session to the browser extension
