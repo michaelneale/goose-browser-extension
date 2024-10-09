@@ -1,4 +1,4 @@
-(function() {
+(function () {
   function scrapePageContent() {
     return {
       url: window.location.href,
@@ -28,29 +28,29 @@
     return text;
   }
 
-  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action === "injectContext" && request.text) {
       const element = document.querySelector('[contenteditable="true"]');
       if (element && element.isContentEditable) {
-        element.textContent = request.text;
-        sendResponse({status: "success"});
+        element.innerText = request.text;
+        sendResponse({ status: "success" });
       } else {
-        sendResponse({status: "failed", error: "Element not found or not editable"});
+        sendResponse({ status: "failed", error: "Element not found or not editable" });
       }
       return true;
     }
     if (request.action === "scrape") {
       try {
         const scrapedData = scrapePageContent();
-        sendResponse({data: scrapedData});
+        sendResponse({ data: scrapedData });
       } catch (error) {
         console.error("Error scraping page:", error);
-        sendResponse({error: "Failed to scrape page content"});
+        sendResponse({ error: "Failed to scrape page content" });
       }
     }
     return true;
   });
-  
+
   // Expose functions for testing when in a test environment
   if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
     module.exports = {

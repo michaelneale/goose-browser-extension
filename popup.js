@@ -43,8 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Scrape when the button is clicked
   scrapeButton.addEventListener('click', scrapeAndSend);
-
-  // Placeholder function for the 'askGooseButton'
+  
   function askGoose() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       if (!tabs || tabs.length === 0) {

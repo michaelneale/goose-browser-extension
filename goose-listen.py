@@ -32,9 +32,10 @@ tasks:
   - please read the chatgpt context from {chat_file_path}
   - look at the chat context to work out what things are up to, if we need to test something
   - note where code blocks may be in the context, and what content is irrelevant
-  - if you are running in an empty directory, assume that the user will want to build some of what was described in the chat session thus far as a new project (ask if not clear)
+  - if you are running in an empty directory, assume that the user will want to build some of what was described in the chat session thus far as a new project (and start doing that, ask if not clear)
   - check if in an existing project dir, and look around and work out how to contribute to it from the chat so far (ask if unclear).
-  - decide if you want to ask the user what to do next, with a summary of the last interaction from chat
+  - after each interaction, write the latest status report of what was done (with context, examples) to a .goose-wip.md file
+  
 """
             
             with open(plan_file_path, 'w') as f:
@@ -66,22 +67,20 @@ tasks:
             self.wfile.write(b"Error: Received data is not valid JSON")
 
     def do_GET(self):
-        if self.path == '/context':
-        # Return some mock context data for testing
-                context_data = {
-            'text': 'This is a sample context text from the server.'
-        }
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
-        self.wfile.write(json.dumps(context_data).encode('utf-8'))
-        return
+        if self.path == '/context':        
+            file_path = os.path.expanduser('~/Documents/goose-chat/.goose-wip.md')
+            if os.path.exists(file_path):
+                with open(file_path, 'r') as f:
+                    context_text = f.read()
+                context_data = {'text': context_text}
+            else:
+                context_data = {'text': 'No .goose-wip.md file found.'}
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps(context_data).encode('utf-8'))
+            return
 
-    # For other GET requests, return a simple message
-        self.send_response(200)
-        self.send_header('Content-type', 'text/plain')
-        self.end_headers()
-        self.wfile.write(b"Goose Listener is running")
 
 PORT = 9898
 
