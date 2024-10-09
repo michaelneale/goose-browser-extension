@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
           })
           .catch(error => {
             console.error('Error sending data to localhost:9898:', error.message);
-document.getElementById('result').innerText = 'The goose listener must be running. Please run python goose-listen.py';
+            document.getElementById('result').innerText = 'The goose listener must be running. Please run python goose-listen.py';
           });
         } else {
           console.error('Error: Could not scrape data');
@@ -43,4 +43,31 @@ document.getElementById('result').innerText = 'The goose listener must be runnin
 
   // Scrape when the button is clicked
   scrapeButton.addEventListener('click', scrapeAndSend);
+
+  // Placeholder function for the 'askGooseButton'
+  function askGoose() {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      if (!tabs || tabs.length === 0) {
+        console.error('Error: No active tab found');
+        return;
+      }
+
+      chrome.tabs.sendMessage(tabs[0].id, {action: "injectContext", text: "hello world"}, function(response) {
+        if (chrome.runtime.lastError) {
+          console.error('Error:', chrome.runtime.lastError.message);
+          return;
+        }
+
+        if (response && response.status === 'success') {
+          console.log('Text injected successfully');
+        } else {
+          console.error('Error injecting text:', response.error || 'Unknown error');
+        }
+      });
+    });
+  }
+
+  const askGooseButton = document.getElementById('askGooseButton');
+  askGooseButton.addEventListener('click', askGoose);
+
 });

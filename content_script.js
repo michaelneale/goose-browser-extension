@@ -29,6 +29,16 @@
   }
 
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.action === "injectContext" && request.text) {
+      const element = document.querySelector('[contenteditable="true"]');
+      if (element && element.isContentEditable) {
+        element.textContent = request.text;
+        sendResponse({status: "success"});
+      } else {
+        sendResponse({status: "failed", error: "Element not found or not editable"});
+      }
+      return true;
+    }
     if (request.action === "scrape") {
       try {
         const scrapedData = scrapePageContent();
