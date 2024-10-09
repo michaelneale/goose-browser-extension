@@ -19,11 +19,10 @@ https://github.com/user-attachments/assets/dedde39c-6eb9-425e-a2cf-6588605e3afe
 
 ## Limitations and TODO
 
-Have to run a goose listener for now to hand off to a goose session
+Have to run a goose listener for now to hand off to a goose session (would like to replace this with something more native)
 Doesn't as crisply pull out context as it could
 Only tested with ChatGPT
 Only starts new sessions
-TODO: should be able to push back into chatgpt to add in newer context from the session in goose and go back and forth ideally (can use session jsonl for that ideally to sync context)
 
 
 <img width="1268" alt="image" src="https://github.com/user-attachments/assets/ababf8e0-b49e-4c80-b8bc-1709f37220ad">
